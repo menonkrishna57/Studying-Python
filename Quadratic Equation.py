@@ -1,0 +1,1 @@
+eq=input("Enter your equation(in format 'ax2 + bx + c = 0'):")
