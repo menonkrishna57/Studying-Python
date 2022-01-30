@@ -7,4 +7,4 @@ print(discrim)
 #-b+- sq(b^2 -4ac)
 sol1=(-b+cmath.sqrt(discrim))/2*a
 sol2=(-b-cmath.sqrt(discrim))/2*a
-print(f"The solution for {a}x²+{b}x+{c} is {sol1} and {sol2}")
+print(f"The solution for {a}x²+{b}x+{c} is {sol1} and {sol2}")      
