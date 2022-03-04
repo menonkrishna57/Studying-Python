@@ -1,6 +1,3 @@
-from operator import truediv
-
-
 number=int(input("Enter Number:"))
 prime=0
 primecheck=False
