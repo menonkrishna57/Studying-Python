@@ -1,14 +1,17 @@
+ingredients=[]
 def inputer():
-    global likes,dislikes
-    pc=int(input("Potential Customers: "))
+    global likes,dislikes,potential_cust
+    potential_cust=int(input("Potential Customers: "))
     likes=[]
     dislikes=[]
-    for i in range(pc):
+    for i in range(potential_cust):
         lk=input("Things the customer likes: ").split()
         dlk=input("Things the customer hates: ").split()
         likes.append(lk)
         dislikes.append(dlk)
     print()
+
+
 
 def repeater(a):
     checked=list()
@@ -19,8 +22,15 @@ def repeater(a):
             dumper=[counter,i]
             final.append(dumper)
             checked.append(i)
-    print(final)
     
+
+def allIngredients(new):#Gets all the ingredients without repetition
+    global ingredients
+    if new not in ingredients:
+        ingredients.append(new)
+
+
+
 def likeCalc():
     global totallikes
     totallikes=[]
@@ -28,6 +38,7 @@ def likeCalc():
         for p in i:
             if p.isnumeric()==False:
                 totallikes.append(p)
+                allIngredients(p)
     repeater(totallikes)    
 
 def dislikeCalc():
@@ -37,11 +48,49 @@ def dislikeCalc():
         for p in i:
             if p.isnumeric()==False:
                 totaldislikes.append(p)
+                allIngredients(p)
     repeater(totaldislikes)
 
-    
-    
 
-inputer()
-likeCalc()
-dislikeCalc()
+
+def CustomerCheck(ingred): #Checks how many customers with the current ingredients
+        
+        likedno=0
+        for customer_no in range(potential_cust):
+            liked=True
+            for dislike_no in range(int(len(dislikes[customer_no]))):
+
+                if dislikes[customer_no][dislike_no] in ingred:
+                    liked=False
+            if liked==True:
+                for like_no in range(len(likes[customer_no])):
+
+                    if likes[customer_no][like_no] not in ingred and likes[customer_no][like_no].isnumeric()==False:
+                        liked=False
+                if liked==True:
+                    likedno+=1
+            
+                    
+        return likedno
+
+def allIngreds(ingred):
+    from itertools import combinations as c
+    p=[]
+    for i in range(len(ingred)):
+        a=list(c(ingred, i))
+        p.append(a)
+    return p #Gets all the possible ingredients
+
+def master():
+    inputer()
+    likeCalc()
+    dislikeCalc()
+    a=allIngreds(ingredients)
+    print(a)
+    for i in a:
+        for t in i:
+            print(CustomerCheck(i))
+
+
+
+master()
