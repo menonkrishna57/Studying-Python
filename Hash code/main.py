@@ -13,8 +13,17 @@ def inputer():
 
 def file_inputer():
     global likes,dislikes,potential_cust
-    file_object=open("input_data\\c_coarse.in.txt")
+    likes=[]
+    dislikes=[]
+    file_object=open("C:\\Users\\menon\\Codes\\Studying-Python\\Hash code\\d_difficult.in.txt","r")
     potential_cust=int(file_object.readline())
+    file_contents=file_object.readlines()
+    for i in range(len(file_contents)):
+        if i%2:
+            dislikes.append(file_contents[i].split())
+        else:
+            likes.append(file_contents[i].split())
+    
 
 
 def repeater(a):
@@ -82,19 +91,36 @@ def allIngreds(ingred):
     for i in range(len(ingred)):
         a=list(c(ingred, i))
         p.append(a)
+        print(len(p))
     p.append((ingred))
     return p #Gets all the possible ingredients
 
+def maxcustomers(customers_for_all):
+    maxcustoms=0
+    maxmenu=[]
+    for i in range(len(customers_for_all)):
+        if maxcustoms<customers_for_all[i][0]:
+            maxcustoms=customers_for_all[i][0]
+            maxmenu=customers_for_all[i][1]
+    return maxcustoms,maxmenu
+
+
 def master():
-    inputer()
-    likeCalc()
-    dislikeCalc()
-    all_possible_menu=allIngreds(ingredients)
+    #inputer()
+    
+    
+    #dislikeCalc()
+    
+    
     print(all_possible_menu)
-    for i in all_possible_menu:
-        for t in i:
-            print(CustomerCheck(t),t)
+    customers=[]
+    for menu_set in all_possible_menu:
+        for menu in menu_set:
+            customers.append([CustomerCheck(menu),menu])
+    maxstuff=list(maxcustomers(customers))
+    print("You will get",maxstuff[0],"with the menu as:",maxstuff[1])
 
-
-
+#file_inputer()
+likeCalc()
+all_possible_menu=allIngreds(ingredients)
 master()
