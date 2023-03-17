@@ -11,6 +11,10 @@ def inputer():
         dislikes.append(dlk)
     print()
 
+def file_inputer():
+    global likes,dislikes,potential_cust
+    file_object=open("input_data\\c_coarse.in.txt")
+    potential_cust=int(file_object.readline())
 
 
 def repeater(a):
@@ -41,6 +45,7 @@ def likeCalc():
                 allIngredients(p)
     repeater(totallikes)    
 
+
 def dislikeCalc():
     global totaldislikes
     totaldislikes=[]
@@ -69,8 +74,6 @@ def CustomerCheck(ingred): #Checks how many customers with the current ingredien
                         liked=False
                 if liked==True:
                     likedno+=1
-            
-                    
         return likedno
 
 def allIngreds(ingred):
@@ -79,17 +82,18 @@ def allIngreds(ingred):
     for i in range(len(ingred)):
         a=list(c(ingred, i))
         p.append(a)
+    p.append((ingred))
     return p #Gets all the possible ingredients
 
 def master():
     inputer()
     likeCalc()
     dislikeCalc()
-    a=allIngreds(ingredients)
-    print(a)
-    for i in a:
+    all_possible_menu=allIngreds(ingredients)
+    print(all_possible_menu)
+    for i in all_possible_menu:
         for t in i:
-            print(CustomerCheck(i))
+            print(CustomerCheck(t),t)
 
 
 
