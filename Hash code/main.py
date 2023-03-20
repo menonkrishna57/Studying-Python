@@ -25,7 +25,6 @@ def file_inputer():
             likes.append(file_contents[i].split())
     
 
-
 def repeater(a):
     checked=list()
     final=[]
@@ -45,17 +44,22 @@ def allIngredients(new):#Gets all the ingredients without repetition
 
 
 def likeCalc():
-    global totallikes
+    totaldislikes=[]
     totallikes=[]
     for i in likes:
         for p in i:
             if p.isnumeric()==False:
                 totallikes.append(p)
                 allIngredients(p)
+    for i in dislikes:
+        for p in i:
+            if p.isnumeric()==False:
+                totaldislikes.append(p)
+                allIngredients(p)
     repeater(totallikes)    
 
 
-def dislikeCalc():
+"""def dislikeCalc():
     global totaldislikes
     totaldislikes=[]
     for i in dislikes:
@@ -63,7 +67,7 @@ def dislikeCalc():
             if p.isnumeric()==False:
                 totaldislikes.append(p)
                 allIngredients(p)
-    repeater(totaldislikes)
+    repeater(totaldislikes)"""
 
 
 
@@ -89,9 +93,9 @@ def allIngreds(ingred):
     from itertools import combinations as c
     p=[]
     for i in range(len(ingred)):
-        a=list(c(ingred, i))
+        a=set(c(ingred, i))
         p.append(a)
-        print(len(p))
+        print(a)
     p.append((ingred))
     return p #Gets all the possible ingredients
 
@@ -106,8 +110,10 @@ def maxcustomers(customers_for_all):
 
 
 def master():
+    file_inputer()
     #inputer()
-    
+    likeCalc()
+    all_possible_menu=allIngreds(ingredients)
     
     #dislikeCalc()
     
@@ -120,7 +126,6 @@ def master():
     maxstuff=list(maxcustomers(customers))
     print("You will get",maxstuff[0],"with the menu as:",maxstuff[1])
 
-#file_inputer()
-likeCalc()
-all_possible_menu=allIngreds(ingredients)
+
+
 master()
