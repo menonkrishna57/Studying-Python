@@ -15,7 +15,7 @@ def file_inputer():
     global likes,dislikes,potential_cust
     likes=[]
     dislikes=[]
-    file_object=open("C:\\Users\\menon\\Codes\\Studying-Python\\Hash code\\d_difficult.in.txt","r")
+    file_object=open("./input_data/c_coarse.txt","r")
     potential_cust=int(file_object.readline())
     file_contents=file_object.readlines()
     for i in range(len(file_contents)):
@@ -23,6 +23,7 @@ def file_inputer():
             dislikes.append(file_contents[i].split())
         else:
             likes.append(file_contents[i].split())
+    print(dislikes,likes,sep="\n")
     
 
 def repeater(a):
@@ -128,4 +129,4 @@ def master():
 
 
 
-master()
+file_inputer()
