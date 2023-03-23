@@ -24,8 +24,10 @@ def readFile():
     file_contents=file_object.readlines()
     for i in file_contents:
         myfile=i.split("\t")
+        file_object.seek(10,2)
+        print(file_object.read())
         if int(myfile[2])>100:
             print(i)
 
-createFile()
+#createFile()
 readFile()
